@@ -1,7 +1,6 @@
 // Code to fetch news from newsapi.org
 
 
-
 fetch(requestUrl1)
   .then((response) => response.json())
   .then((data) => {
@@ -56,7 +55,6 @@ fetch(requestUrl1)
   .catch((error) => {
     console.log(`Fetch error: ${error}`);
   });
-
 
 
 fetch(requestUrl2)
