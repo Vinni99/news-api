@@ -1,7 +1,6 @@
 // Code to fetch news from newsapi.org
 
-const requestUrl1 =
-  "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=bfa59f4635284b8f90903e78c7994731";
+
 
 fetch(requestUrl1)
   .then((response) => response.json())
@@ -58,8 +57,7 @@ fetch(requestUrl1)
     console.log(`Fetch error: ${error}`);
   });
 
-const requestUrl2 =
-  "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=bfa59f4635284b8f90903e78c7994731";
+
 
 fetch(requestUrl2)
   .then((response) => response.json())
