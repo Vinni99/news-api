@@ -1,16 +1,15 @@
 // Function to display the APi
-const express = require('express');
+const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+app.get("/", (req, res) => {
+  res.send("Hello World!");
 });
 
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);
 });
-
 
 //This the Card for the first API
 
@@ -23,18 +22,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const requestUrl1 = `https://newsapi.org/v2/everything?domains=wsj.com&apiKey=${myKey}`;
 
     fetch(requestUrl1)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         const articles = data.articles.slice(0, 6); // Get the first 6 articles
 
-        articles.forEach(article => {
+        articles.forEach((article) => {
           const card = createNewsCard(article);
           const container = document.getElementById("news-cards");
           container.appendChild(card);
         });
       })
-      .catch(error => {
-        console.error('Fetch error:', error);
+      .catch((error) => {
+        console.error("Fetch error:", error);
       });
   };
 
@@ -43,18 +42,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const requestUrl2 = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${myKey}`;
 
     fetch(requestUrl2)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         const articles = data.articles.slice(1, 6); // Get articles from index 1 to 5
 
-        articles.forEach(article => {
+        articles.forEach((article) => {
           const card = createBusinessCard(article);
           const container = document.getElementById("business-cards");
           container.appendChild(card);
         });
       })
-      .catch(error => {
-        console.error('Fetch error:', error);
+      .catch((error) => {
+        console.error("Fetch error:", error);
       });
   };
 
@@ -157,21 +156,21 @@ document.addEventListener("DOMContentLoaded", function () {
   fetchBusinessHeadlines();
 
   // Weather API functionality
-  const searchForm = document.getElementById('search-form');
-  const searchInput = document.getElementById('search-input');
-  const weatherIcon = document.getElementById('weather-icon');
-  const weatherDescription = document.getElementById('weather-description');
-  const temperature = document.getElementById('temperature');
-  const forecastContainer = document.getElementById('forecast-container');
+  const searchForm = document.getElementById("search-form");
+  const searchInput = document.getElementById("search-input");
+  const weatherIcon = document.getElementById("weather-icon");
+  const weatherDescription = document.getElementById("weather-description");
+  const temperature = document.getElementById("temperature");
+  const forecastContainer = document.getElementById("forecast-container");
 
-  searchForm.addEventListener('submit', function (event) {
+  searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
     const cityName = searchInput.value.trim();
 
     if (cityName) {
       fetchWeatherData(cityName);
     } else {
-      console.error('Please enter a city name.');
+      console.error("Please enter a city name.");
     }
   });
 
@@ -179,8 +178,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${weatherApiKey}`;
 
     fetch(apiUrl)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         console.log(data);
 
         weatherIcon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
@@ -190,8 +189,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         fetchForecast(cityName);
       })
-      .catch(error => {
-        console.error('Error fetching weather data:', error);
+      .catch((error) => {
+        console.error("Error fetching weather data:", error);
       });
   };
 
@@ -199,17 +198,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=${weatherApiKey}`;
 
     fetch(apiUrl)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         console.log(data);
 
-        forecastContainer.innerHTML = ''; // Clear previous forecast data
+        forecastContainer.innerHTML = ""; // Clear previous forecast data
 
-        const forecasts = data.list.filter((forecast, index) => index % 8 === 0); // Filter to get forecasts for every 24 hours
+        const forecasts = data.list.filter(
+          (forecast, index) => index % 8 === 0
+        ); // Filter to get forecasts for every 24 hours
 
-        forecasts.forEach(forecast => {
+        forecasts.forEach((forecast) => {
           const forecastDate = new Date(forecast.dt * 1000);
-          const forecastDay = forecastDate.toLocaleDateString('en-US', { weekday: 'short' });
+          const forecastDay = forecastDate.toLocaleDateString("en-US", {
+            weekday: "short",
+          });
           const forecastTemperature = forecast.main.temp.toFixed(1);
           const forecastDescription = forecast.weather[0].description;
           const forecastIcon = `http://openweathermap.org/img/wn/${forecast.weather[0].icon}.png`;
@@ -226,8 +229,8 @@ document.addEventListener("DOMContentLoaded", function () {
           forecastContainer.innerHTML += forecastCard;
         });
       })
-      .catch(error => {
-        console.error('Error fetching forecast data:', error);
+      .catch((error) => {
+        console.error("Error fetching forecast data:", error);
       });
   };
 });
