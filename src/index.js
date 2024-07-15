@@ -3,8 +3,10 @@
 //This the Card for the first API
 
 document.addEventListener("DOMContentLoaded", function () {
-  const myKey = config.MY_KEY;
-  const weatherApiKey = config.WEATHER_KEY;
+  // const myKey = config.MY_KEY;
+  // const weatherApiKey = config.WEATHER_KEY;
+  const myKey = process.env.MY_KEY;
+  const weatherApiKey = process.env.WEATHER_KEY;
 
   // Fetch news articles from WSJ
   const fetchNewsArticles = () => {
